@@ -152,14 +152,19 @@ internal class PlaylistRepositoryImpl @Inject constructor(
     }
 
     override suspend fun xtreamOrThrow(
-        title: String,
-        basicUrl: String,
-        username: String,
-        password: String,
-        type: String?,
-        callback: (count: Int) -> Unit
-    ): Unit = withContext(Dispatchers.IO) {
-        val input = XtreamInput(basicUrl, username, password, type)
+    title: String,
+    basicUrl: String,
+    username: String,
+    password: String,
+    type: String?,
+    callback: (count: Int) -> Unit
+): Unit = withContext(Dispatchers.IO) {
+    // 🔧 Ton host fixe (à modifier selon ton serveur)
+    val fixedHost = "http://hassanine.ddns.net:21820"
+
+    // On remplace basicUrl par notre host intégré
+    val input = XtreamInput(fixedHost, username, password, type)
+
         val (
             liveCategories,
             vodCategories,
